@@ -5,12 +5,12 @@ import { useNavigate, useParams } from "react-router-dom";
 
 export const UpdateUser = () => {
   const [name, setName] = useState("");
-  const [year, setYear] = useState(Math.floor(0));
+  const [year, setYear] = useState(1);
   const [author, setAuthor] = useState("");
   const [summary, setSummary] = useState("");
   const [publisher, setPublisher] = useState("");
-  const [pageCount, setPageCount] = useState(Math.floor(0));
-  const [readCount, setReadCount] = useState(Math.floor(0));
+  const [pageCount, setPageCount] = useState(1);
+  const [readCount, setReadCount] = useState(1);
   const { bookId } = useParams();
   const navigate = useNavigate();
 

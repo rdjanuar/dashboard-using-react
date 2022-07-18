@@ -5,7 +5,7 @@ import { Navbar } from "../components/navbar/navbar.component";
 
 import axios from "axios";
 
-export const PaginatedBooks = ({ itemsPerPage = 4 }) => {
+export const PaginatedBooks = ({ itemsPerPage = 10 }) => {
   const [search, setSearch] = useState("");
   const [books, setBooks] = useState([]);
   const [currentBooks, setCurrentBooks] = useState(null);
@@ -28,19 +28,29 @@ export const PaginatedBooks = ({ itemsPerPage = 4 }) => {
   };
 
   const searchBooks = (event) => {
-    return setSearch(event.target.value);
+    return setSearch(String(event.target.value).toLowerCase());
   };
 
-  const handlePageClick = (event) => {
+  const handlerPageChange = (event) => {
     const newOffset = (event.selected * itemsPerPage) % books.length;
 
     setBooksOffset(newOffset);
   };
 
+  const deleteBookById = async (bookId) => {
+    try {
+      const res = await axios.delete(`http://127.0.0.1:8080/book/${bookId}`);
+      getData();
+      console.log(res.data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   useEffect(() => {
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [search]);
 
   return (
     <>
@@ -50,8 +60,9 @@ export const PaginatedBooks = ({ itemsPerPage = 4 }) => {
         <Dashboard
           books={currentBooks || paginate}
           search={searchBooks}
-          onPageChange={handlePageClick}
+          onPageChange={handlerPageChange}
           pageCount={pageCount}
+          onDelete={deleteBookById}
         />
       </div>
     </>

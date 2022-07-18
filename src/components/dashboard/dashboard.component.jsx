@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 
-export const Dashboard = ({ books, search, onPageChange, pageCount }) => {
+export const Dashboard = ({
+  books,
+  search,
+  onPageChange,
+  pageCount,
+  onDelete,
+}) => {
   return (
     <main className="bg-white w-999  rounded-lg border border-aenjay mx-10.5  h-full/5">
       <div className="mx-auto container">
@@ -41,8 +47,9 @@ export const Dashboard = ({ books, search, onPageChange, pageCount }) => {
                 <td>{book.author}</td>
                 <td>{book.year}</td>
                 <td>{book.publisher}</td>
-                <td>
+                <td className="space-x-2">
                   <Link to={`/update/${book.id}`}>Edit</Link>
+                  <button onClick={() => onDelete(book.id)}>Delete</button>
                 </td>
               </tr>
             );
