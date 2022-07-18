@@ -1,14 +1,18 @@
 import { Routes, Route } from "react-router-dom";
-import { About } from "../views/About";
+import { PaginatedBooks } from "../views/Dashboard";
 import { Home } from "../views/Home";
+import { UpdateUser } from "../views/updateUser";
+import { Form } from "../views/form";
 
-const Router = () => {
+const RouteList = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/dashboard" element={<About />} />
+      <Route path="/dashboard" element={<PaginatedBooks />} />
+      <Route path="/form" element={<Form />} />
+      <Route path="/update/:bookId" element={<UpdateUser />} />
     </Routes>
   );
 };
 
-export default Router;
+export default RouteList;

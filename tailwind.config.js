@@ -10,6 +10,7 @@ module.exports = {
         colorHeaders: "#252733",
         dashboardColor: "#9FA2B4",
         priceColor: "#252733",
+        formColor: "#FAF8F8",
       },
       padding: {
         4.5: "1.25rem",
@@ -19,15 +20,19 @@ module.exports = {
       },
       borderColor: {
         aenjay: "#DFE0EB",
+        form: "#EFF0F6",
       },
       width: {
         128: "85.5%",
-        999: "95%",
+        999: "93.5%",
       },
       margin: {
         9: "2rem",
         10.5: "2.5rem",
         2.75: "0.6rem",
+      },
+      borderRadius: {
+        formBorder: "2.25rem",
       },
     },
   },
