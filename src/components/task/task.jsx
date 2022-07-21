@@ -1,4 +1,4 @@
-export const Task = ({ books, isDone, isReading }) => {
+export const Task = ({ books, isDone, isReading, users }) => {
   return (
     <section className="mx-auto container">
       <div className="flex items-center justify-evenly text-center">
@@ -16,8 +16,7 @@ export const Task = ({ books, isDone, isReading }) => {
         </div>
         <div className="bg-white border border-aenjay w-52 h-32 rounded-lg flex flex-col justify-center items-center">
           <h2 className="text-dashboardColor">Users</h2>
-          {/* SEMENTARA HARDCODE DULU */}
-          <h1 className="text-4xl">64</h1>
+          <h1 className="text-4xl">{users}</h1>
         </div>
       </div>
     </section>

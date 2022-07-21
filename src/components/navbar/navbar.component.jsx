@@ -1,14 +1,11 @@
 import icons from "../../assert/img/icons/Vector.svg";
-import ideas from "../../assert/img/icons/ideas.svg";
 import ticket from "../../assert/img/icons/ticket.svg";
-import contact from "../../assert/img/icons/contact.svg";
-import article from "../../assert/img/icons/article.svg";
-import agent from "../../assert/img/icons/agent.svg";
 import headerIcons from "../../assert/img/icons/D.svg";
 
 import { Link } from "react-router-dom";
+import { logout } from "../../utils/helper";
 
-export const Navbar = ({ alt }) => {
+export const Navbar = ({ alt, handlerClick }) => {
   return (
     <nav className="bg-dashboardColorKit w-72 h-screen">
       <div className="mx-auto container">
@@ -38,27 +35,11 @@ export const Navbar = ({ alt }) => {
             </li>
           </div>
           <div className="flex">
-            <img src={ideas} className="px-5" alt={alt}></img>
+            <img src={ticket} className="px-5" alt={alt}></img>
             <li>
-              <Link to="/ideas">Ideas</Link>
-            </li>
-          </div>
-          <div className="flex">
-            <img src={contact} className="px-5" alt={alt}></img>
-            <li>
-              <Link to="/contact">Contacts</Link>
-            </li>
-          </div>
-          <div className="flex">
-            <img src={agent} className="px-5" alt={alt}></img>
-            <li>
-              <Link to="/agent">Agents</Link>
-            </li>
-          </div>
-          <div className="flex">
-            <img src={article} className="px-5" alt={alt}></img>
-            <li>
-              <Link to="/article">Articles</Link>
+              <button onClick={() => logout()}>
+                <Link to={"/login"}>Log out</Link>
+              </button>
             </li>
           </div>
         </ul>

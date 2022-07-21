@@ -1,8 +1,7 @@
 import New from "../../assert/img/headers/new.svg";
 import search from "../../assert/img/headers/search.svg";
-import avatar from "../../assert/img/headers/avatar.svg";
 
-export const Header = ({ alt, header }) => {
+export const Header = ({ alt, header, user }) => {
   return (
     <header className="mx-auto container">
       <div className="flex items-center justify-between p-10">
@@ -13,8 +12,7 @@ export const Header = ({ alt, header }) => {
           <img src={search} className="px-2" alt={alt}></img>
           <img src={New} className="px-2" alt={alt}></img>
           <div className="flex items-center">
-            <p className="px-2">Jones Ferdinand</p>
-            <img src={avatar} className="px-2" alt={alt}></img>
+            <p className="px-2">{user}</p>
           </div>
         </div>
       </div>

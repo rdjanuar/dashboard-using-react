@@ -26,7 +26,7 @@ export const Dashboard = ({
           </button>
         </div>
       </div>
-      <table className="container mx-auto mt-10 table-fixed grid grid-cols-1 divide-y">
+      <table className="container mx-auto mt-10 table-auto grid grid-cols-1 divide-y">
         <thead>
           <tr className="flex justify-between mx-20 ">
             <th>Nama Buku</th>
@@ -39,10 +39,7 @@ export const Dashboard = ({
         <tbody className="grid grid-cols-1 divide-y">
           {books.map((book, index) => {
             return (
-              <tr
-                className="flex justify-between mx-20 break-words"
-                key={index}
-              >
+              <tr className="flex justify-between mx-20" key={index}>
                 <td>{book.name}</td>
                 <td>{book.author}</td>
                 <td>{book.year}</td>

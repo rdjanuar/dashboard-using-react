@@ -1,18 +1,28 @@
 import { Formdata } from "../components/form/form.component";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 export const UpdateUser = () => {
-  const [name, setName] = useState("");
-  const [year, setYear] = useState(1);
-  const [author, setAuthor] = useState("");
-  const [summary, setSummary] = useState("");
-  const [publisher, setPublisher] = useState("");
-  const [pageCount, setPageCount] = useState(1);
-  const [readCount, setReadCount] = useState(1);
   const { bookId } = useParams();
   const navigate = useNavigate();
+
+  const initialValues = {
+    name: "",
+    year: null,
+    author: "",
+    summary: "",
+    publisher: "",
+    pageCount: null,
+    readCount: null,
+  };
+
+  const [formValues, setFormValues] = useReducer(
+    (curvlas, newVals) => ({ ...curvlas, ...newVals }),
+    initialValues
+  );
+  const { name, year, author, summary, publisher, pageCount, readCount } =
+    formValues;
 
   const UpdateUser = async (event) => {
     event.preventDefault();
@@ -26,23 +36,30 @@ export const UpdateUser = () => {
       readCount,
     };
     try {
-      await axios.put(`http://127.0.0.1:8080/book/${bookId}`, data);
+      await axios.put(`http://127.0.0.1:8080/api/v1/book/${bookId}`, data, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
       navigate("/dashboard");
     } catch (error) {
       console.log(error.message);
     }
   };
   const getUserById = async () => {
-    const respose = await axios.get(`http://127.0.0.1:8080/book/${bookId}`);
+    const respose = await axios.get(
+      `http://127.0.0.1:8080/api/v1/book/${bookId}`,
+      {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      }
+    );
     // eslint-disable-next-line array-callback-return
     respose.data.data.map((books) => {
-      setName(books.name);
-      setYear(books.year);
-      setAuthor(books.author);
-      setSummary(books.summary);
-      setPublisher(books.publisher);
-      setPageCount(books.pageCount);
-      setReadCount(books.readCount);
+      setFormValues({ name: books.name });
+      setFormValues({ year: books.year });
+      setFormValues({ author: books.author });
+      setFormValues({ summary: books.summary });
+      setFormValues({ publisher: books.publisher });
+      setFormValues({ pageCount: books.pageCount });
+      setFormValues({ readCount: books.readCount });
     });
   };
 
@@ -56,25 +73,25 @@ export const UpdateUser = () => {
     const { name, value } = event.target;
     switch (name) {
       case "name":
-        setName(value);
+        setFormValues({ [name]: value });
         break;
       case "year":
-        setYear(value);
+        setFormValues({ [name]: value });
         break;
       case "author":
-        setAuthor(value);
+        setFormValues({ [name]: value });
         break;
       case "summary":
-        setSummary(value);
+        setFormValues({ [name]: value });
         break;
       case "publisher":
-        setPublisher(value);
+        setFormValues({ [name]: value });
         break;
       case "pageCount":
-        setPageCount(value);
+        setFormValues({ [name]: value });
         break;
       case "readCount":
-        setReadCount(value);
+        setFormValues({ [name]: value });
         break;
       default:
         break;

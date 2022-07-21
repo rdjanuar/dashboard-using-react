@@ -1,17 +1,27 @@
 import { Formdata } from "../components/form/form.component";
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export const Form = () => {
-  const [name, setName] = useState("");
-  const [year, setYear] = useState(null);
-  const [author, setAuthor] = useState("");
-  const [summary, setSummary] = useState("");
-  const [publisher, setPublisher] = useState("");
-  const [pageCount, setPageCount] = useState(null);
-  const [readCount, setReadCount] = useState(null);
+export const CreateUser = () => {
   const navigate = useNavigate();
+
+  const initialValues = {
+    name: "",
+    year: null,
+    author: "",
+    summary: "",
+    publisher: "",
+    pageCount: null,
+    readCount: null,
+  };
+
+  const [formValues, setFormValues] = useReducer(
+    (curvlas, newVals) => ({ ...curvlas, ...newVals }),
+    initialValues
+  );
+  const { name, year, author, summary, publisher, pageCount, readCount } =
+    formValues;
 
   const HandlerClick = async (event) => {
     event.preventDefault();
@@ -25,7 +35,9 @@ export const Form = () => {
       readCount,
     };
     try {
-      await axios.post("http://127.0.0.1:8080/book", data);
+      await axios.post("http://127.0.0.1:8080/api/v1/book", data, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
       navigate("/dashboard");
     } catch (error) {
       console.log(error.message);
@@ -36,25 +48,25 @@ export const Form = () => {
     const { name, value } = event.target;
     switch (name) {
       case "name":
-        setName(value);
+        setFormValues({ [name]: value });
         break;
       case "year":
-        setYear(value);
+        setFormValues({ [name]: value });
         break;
       case "author":
-        setAuthor(value);
+        setFormValues({ [name]: value });
         break;
       case "summary":
-        setSummary(value);
+        setFormValues({ [name]: value });
         break;
       case "publisher":
-        setPublisher(value);
+        setFormValues({ [name]: value });
         break;
       case "pageCount":
-        setPageCount(value);
+        setFormValues({ [name]: value });
         break;
       case "readCount":
-        setReadCount(value);
+        setFormValues({ [name]: value });
         break;
       default:
         break;

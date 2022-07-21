@@ -17,9 +17,9 @@ export const Formdata = ({
         className=" bg-formColor w-3/6 h-4/6 rounded-formBorder"
         onSubmit={HandlerClick}
         method="POST"
-        action="http://127.0.0.1:8080/book"
       >
-        <div className="flex flex-wrap">
+        <h1 className="text-center font-bold text-xl mt-20">Format Buku</h1>
+        <div className="flex flex-wrap items-center justify-center">
           <input
             type="text"
             placeholder="name"
@@ -68,21 +68,23 @@ export const Formdata = ({
             onChange={handlerChange}
             className="p-3 mt-10 w-3/12 rounded-lg mx-20"
           ></input>
+        </div>
+        <div className="flex justify-center">
           <input
             type="number"
             placeholder="readCount"
             value={readCount}
             name="readCount"
             onChange={handlerChange}
-            className="p-3 mt-10 w-3/12 rounded-lg mx-20"
+            className="p-3 mt-10 w-3/12 rounded-lg mx-20 "
           ></input>
+          <button
+            type="submit"
+            className="p-3 mt-10 w-3/12 rounded-lg  bg-red-500 mx-20"
+          >
+            Simpan
+          </button>
         </div>
-        <button
-          type="submit"
-          className=" p-3 mt-10 w-3/12 rounded-lg mx-64 bg-red-500"
-        >
-          Simpan
-        </button>
       </form>
     </div>
   );

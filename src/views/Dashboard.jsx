@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { Header } from "../components/header/hearder.component";
 import { Dashboard } from "../components/dashboard/dashboard.component";
 import { Navbar } from "../components/navbar/navbar.component";
+import { userData } from "../utils/helper";
 
 import axios from "axios";
 
@@ -20,7 +21,12 @@ export const PaginatedBooks = ({ itemsPerPage = 10 }) => {
 
   const getData = async () => {
     try {
-      const res = await axios.get(`http://127.0.0.1:8080/book?name=${search}`);
+      const res = await axios.get(
+        `http://127.0.0.1:8080/api/v1/book?name=${search}`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      );
       setBooks(res.data.result.books);
     } catch (error) {
       console.log(error.message);
@@ -37,11 +43,17 @@ export const PaginatedBooks = ({ itemsPerPage = 10 }) => {
     setBooksOffset(newOffset);
   };
 
+  // Delete Book by Id
   const deleteBookById = async (bookId) => {
     try {
-      const res = await axios.delete(`http://127.0.0.1:8080/book/${bookId}`);
+      const res = await axios.delete(
+        `http://127.0.0.1:8080/api/v1/book/${bookId}`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      );
       getData();
-      console.log(res.data);
+      return res.data;
     } catch (error) {
       console.log(error.message);
     }
@@ -56,7 +68,7 @@ export const PaginatedBooks = ({ itemsPerPage = 10 }) => {
     <>
       <Navbar />
       <div className="flex flex-col w-full">
-        <Header header="Buku" alt="avatar" />
+        <Header header="Buku" alt="avatar" user={userData("username")} />
         <Dashboard
           books={currentBooks || paginate}
           search={searchBooks}

@@ -11,6 +11,9 @@ module.exports = {
         dashboardColor: "#9FA2B4",
         priceColor: "#252733",
         formColor: "#FAF8F8",
+        loginColor: "#F6EFE9",
+        welcomeColor: "#1A293D",
+        submitColor: "#CAB7A8",
       },
       padding: {
         4.5: "1.25rem",
